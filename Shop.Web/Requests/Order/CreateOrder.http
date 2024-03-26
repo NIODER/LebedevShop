@@ -1,0 +1,12 @@
+@Web_HostAddress = http://localhost:5185
+
+PUT {{Web_HostAddress}}/order
+Accept: application/json
+Content-Type: application/json
+
+{
+    "address": "address st1 building 1231",
+    "basketId": "be5cc537-ef9d-4e4e-ac58-b9747098ad24"
+}
+###
+

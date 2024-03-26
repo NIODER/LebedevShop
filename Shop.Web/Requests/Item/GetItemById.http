@@ -1,0 +1,6 @@
+@Web_HostAddress = http://localhost:5185
+
+GET {{Web_HostAddress}}/items/394eed05-f8e3-4e2a-882c-f5a6cff9baaa
+Accept: application/json
+
+###

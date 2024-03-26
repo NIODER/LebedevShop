@@ -1,0 +1,17 @@
+order
+basket
+item
+
+get all items
+get item by id
+create item
+delete item
+
+get basket by id
+add item to basket
+create basket
+remove item from basket
+delete basket
+
+create order
+get order by id

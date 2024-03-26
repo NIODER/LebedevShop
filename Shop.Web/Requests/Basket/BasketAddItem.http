@@ -1,0 +1,8 @@
+@Web_HostAddress = http://localhost:5185
+
+POST {{Web_HostAddress}}/basket/be5cc537-ef9d-4e4e-ac58-b9747098ad24/98c6eb93-b963-4a43-9a46-48c8b86f96eb 
+Accept: application/json
+Content-Type: application/json
+
+###
+

@@ -1,0 +1,6 @@
+@Web_HostAddress = http://localhost:5185
+
+GET {{Web_HostAddress}}/basket/16b5bca9-baaa-4957-acdc-c9c631bbb09b 
+Accept: application/json
+
+###

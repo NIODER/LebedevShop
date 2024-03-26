@@ -1,0 +1,13 @@
+@Web_HostAddress = http://localhost:8080
+
+PUT {{Web_HostAddress}}/items
+Accept: application/json
+Content-Type: application/json
+
+{
+    "itemName": "item1",
+    "description": "cool item!",
+    "cost": 123.123
+}
+###
+

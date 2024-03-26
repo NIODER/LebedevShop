@@ -1,0 +1,8 @@
+@Web_HostAddress = http://localhost:5185
+
+DELETE {{Web_HostAddress}}/basket/16b5bca9-baaa-4957-acdc-c9c631bbb09b/98c6eb93-b963-4a43-9a46-48c8b86f96eb 
+Accept: application/json
+Content-Type: application/json
+
+###
+
