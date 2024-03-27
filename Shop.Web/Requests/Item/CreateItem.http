@@ -5,9 +5,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "itemName": "item1",
+    "itemName": "item123123123l",
     "description": "cool item!",
     "cost": 123.123
 }
 ###
-
