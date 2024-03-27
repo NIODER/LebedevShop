@@ -1,6 +1,7 @@
 import requests
 import time
 import random
+from api import *
 import matplotlib.pyplot as plt
 
 API_URL = "http://localhost:8080"
@@ -70,6 +71,9 @@ for idx, resource in enumerate(resources, start=1):
 
     # График для среднего времени выполнения запроса при различном количестве экземпляров компонентов
     plt.bar([f"(POST) с кол-вом компонентов = {n} " for n in component_data.keys()], component_data.values(), color='lightgreen')
-
+    plt.bar()
+    plt.bar()
+    plt.bar()
+    plt.bar()
 plt.tight_layout()
 plt.show()
