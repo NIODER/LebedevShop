@@ -30,7 +30,6 @@ services:
       - db-1
       - db-2
       - pgpool1
-      - pgpool2
   web2:
     build: ../../Shop.Web
     volumes:

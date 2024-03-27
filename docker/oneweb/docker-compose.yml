@@ -5,7 +5,6 @@ services:
     image: nginx
     links:
       - web1:web1
-      - web2:web2
     ports:
       - 8080:8080
     volumes:
@@ -15,7 +14,6 @@ services:
     image: nginx
     links:
       - web1:web1
-      - web2:web2
     ports:
       - 8081:8080
     volumes:

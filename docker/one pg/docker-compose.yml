@@ -28,7 +28,6 @@ services:
       - ../appsettings.json:/App/appsettings.json:rw
     depends_on:
       - db-1
-      - db-2
       - pgpool1
       - pgpool2
   web2:
@@ -38,7 +37,6 @@ services:
       - ../appsettings.json:/App/appsettings.json:rw
     depends_on:
       - db-1
-      - db-2
       - pgpool1
       - pgpool2
   db-1:
@@ -61,7 +59,6 @@ services:
     image: bitnami/pgpool
     depends_on:
       - db-1
-      - db-2
     ports:
       - 5432:5432
     environment:
@@ -82,7 +79,6 @@ services:
     image: bitnami/pgpool
     depends_on:
       - db-1
-      - db-2
     ports:
       - 5433:5432
     environment:
