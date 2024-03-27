@@ -54,27 +54,9 @@ services:
       - POSTGRESQL_DATABASE=postgres
       - REPMGR_PASSWORD=repmgrpassword
       - REPMGR_PRIMARY_HOST=db-1
-      - REPMGR_PARTNER_NODES=db-1,db-2
+      - REPMGR_PARTNER_NODES=db-1
       - REPMGR_NODE_NAME=db-1
       - REPMGR_NODE_NETWORK_NAME=db-1
-  db-2:
-    image: bitnami/postgresql-repmgr:latest
-    depends_on:
-      - db-1
-    ports:
-      - 5435:5432
-    volumes:
-      - db2_data:/bitnami/postgresql
-    environment:
-      - POSTGRESQL_POSTGRES_PASSWORD=nioder
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_PASSWORD=nioder
-      - POSTGRESQL_DATABASE=postgres
-      - REPMGR_PASSWORD=repmgrpassword
-      - REPMGR_PRIMARY_HOST=db-1
-      - REPMGR_PARTNER_NODES=db-1,db-2
-      - REPMGR_NODE_NAME=db-2
-      - REPMGR_NODE_NETWORK_NAME=db-2
   pgpool1:
     image: bitnami/pgpool
     depends_on:
@@ -83,7 +65,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - PGPOOL_BACKEND_NODES=0:db-1:5432,1:db-2:5432
+      - PGPOOL_BACKEND_NODES=0:db-1:5432
       - PGPOOL_SR_CHECK_USER=postgres
       - PGPOOL_SR_CHECK_PASSWORD=nioder
       - PGPOOL_ENABLE_LDAP=no
@@ -104,7 +86,7 @@ services:
     ports:
       - 5433:5432
     environment:
-      - PGPOOL_BACKEND_NODES=0:db-1:5432,1:db-2:5432
+      - PGPOOL_BACKEND_NODES=0:db-1:5432
       - PGPOOL_SR_CHECK_USER=postgres
       - PGPOOL_SR_CHECK_PASSWORD=nioder
       - PGPOOL_ENABLE_LDAP=no

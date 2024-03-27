@@ -31,16 +31,6 @@ services:
       - db-2
       - pgpool1
       - pgpool2
-  web2:
-    build: ../../Shop.Web
-    volumes:
-      - ../appsettings.Development.json:/App/appsettings.Development.json:rw
-      - ../appsettings.json:/App/appsettings.json:rw
-    depends_on:
-      - db-1
-      - db-2
-      - pgpool1
-      - pgpool2
   db-1:
     image: bitnami/postgresql-repmgr:latest
     ports:

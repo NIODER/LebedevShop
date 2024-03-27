@@ -24,8 +24,8 @@ services:
   web1:
     build: ../../Shop.Web
     volumes:
-      - ../appsettings.Development.json:/App/appsettings.Development.json:rw
-      - ../appsettings.json:/App/appsettings.json:rw
+      - ./appsettings.Development.json:/App/appsettings.Development.json:rw
+      - ./appsettings.json:/App/appsettings.json:rw
     depends_on:
       - db-1
       - db-2
@@ -34,13 +34,12 @@ services:
   web2:
     build: ../../Shop.Web
     volumes:
-      - ../appsettings.Development.json:/App/appsettings.Development.json:rw
-      - ../appsettings.json:/App/appsettings.json:rw
+      - ./appsettings.Development.json:/App/appsettings.Development.json:rw
+      - ./appsettings.json:/App/appsettings.json:rw
     depends_on:
       - db-1
       - db-2
       - pgpool1
-      - pgpool2
   db-1:
     image: bitnami/postgresql-repmgr:latest
     ports:
@@ -82,27 +81,6 @@ services:
       - db-2
     ports:
       - 5432:5432
-    environment:
-      - PGPOOL_BACKEND_NODES=0:db-1:5432,1:db-2:5432
-      - PGPOOL_SR_CHECK_USER=postgres
-      - PGPOOL_SR_CHECK_PASSWORD=nioder
-      - PGPOOL_ENABLE_LDAP=no
-      - PGPOOL_POSTGRES_USERNAME=postgres
-      - PGPOOL_POSTGRES_PASSWORD=nioder
-      - PGPOOL_ADMIN_USERNAME=postgres
-      - PGPOOL_ADMIN_PASSWORD=nioder
-    healthcheck:
-      test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-  pgpool2:
-    image: bitnami/pgpool
-    depends_on:
-      - db-1
-      - db-2
-    ports:
-      - 5433:5432
     environment:
       - PGPOOL_BACKEND_NODES=0:db-1:5432,1:db-2:5432
       - PGPOOL_SR_CHECK_USER=postgres
