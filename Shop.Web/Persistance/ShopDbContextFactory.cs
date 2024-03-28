@@ -20,9 +20,39 @@ public sealed class ShopDbContextFactory(IConfiguration configuration) : IDbCont
 
     public async Task EnsureDatabasesCreated()
     {
+        List<string> failedConnectionStrings = [];
         foreach (var connectionString in _connecitonStrings)
         {
-            await CreateContext(connectionString).Database.EnsureCreatedAsync();
+            try
+            {
+                await CreateContext(connectionString).Database.EnsureCreatedAsync();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Failed to create database");
+                Console.WriteLine("Error message:");
+                Console.WriteLine(e);
+                failedConnectionStrings.Add(connectionString);
+            }
+        }
+        while (failedConnectionStrings.Count != 0)
+        {
+            for (int i = 0; i < failedConnectionStrings.Count; i++)
+            {
+                try
+                {
+                    await CreateContext(failedConnectionStrings[i]).Database.EnsureCreatedAsync();
+                    failedConnectionStrings.RemoveAt(i);
+                    i--;
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("Failed to create database");
+                    continue;
+                }
+            }
+            Console.WriteLine("Retrying in 3 seconds");
+            await Task.Delay(3000);
         }
     }
 
