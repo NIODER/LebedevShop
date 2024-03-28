@@ -65,6 +65,7 @@ app.MapPost("/basket/{basketId}/{itemId}", (ShopDbContext context, Guid basketId
     basket.AddItem(item);
     context.Baskets.Update(basket);
     context.SaveChanges();
+    return basket;
 });
 
 app.MapPut("/basket", (ShopDbContext context) =>
@@ -82,6 +83,7 @@ app.MapDelete("/basket/{basketId}/{itemId}", (ShopDbContext context, Guid basket
     basket.RemoveItemById(itemId);
     context.Baskets.Update(basket);
     context.SaveChanges();
+    return basket;
 });
 
 app.MapDelete("/basket/{id}", (ShopDbContext context, Guid id) =>
@@ -91,6 +93,7 @@ app.MapDelete("/basket/{id}", (ShopDbContext context, Guid id) =>
         .SingleOrDefault(b => b.BasketId == id) ?? throw new ArgumentException($"No basket with id {id} found.");
     context.Remove(basket);
     context.SaveChanges();
+    return basket;
 });
 
 app.MapPut("/order", (ShopDbContext context, [FromBody]CreateOrderRequest request) =>
