@@ -1,6 +1,5 @@
 import requests
 import time
-import random
 from api import *
 import matplotlib.pyplot as plt
 

@@ -1,6 +1,4 @@
-import time
 import matplotlib.pyplot as plt
-from collections import defaultdict
 import random
 from api import *
 
@@ -19,9 +17,6 @@ def measure_and_plot_requests(request_functions, num_requests):
         ax.set_title(f'{request_name} (Average: {avg_time:.3f} s)')
 
         plt.show()
-
-
-
 
 
 # Список функций запросов
