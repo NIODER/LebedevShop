@@ -7,6 +7,7 @@ CALL :StartTesting oneweb %~1
 
 py ./statistics/summary.py %~1
 
+./statistics/script/clear_temp.bat
 ./statistics/scripts/clear_nginx_logs.bat
 
 EXIT /B %ERROR_LEVEL%
