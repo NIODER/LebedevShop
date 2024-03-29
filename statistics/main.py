@@ -1,10 +1,10 @@
-import json
 import os
 import random
 import sys
 from matplotlib import pyplot as plt
 import scenarios
 import api
+import pickle
 
 
 def draw_graph(request_name: str, times: list[float]):
@@ -12,11 +12,13 @@ def draw_graph(request_name: str, times: list[float]):
     fig, ax = plt.subplots(figsize=(8, 6))
     fig.suptitle(f'{request_name} execution time')
     avg_time = sum(times) / len(times)
+    pickle.dump(times, open(os.path.join(data_path, f'{request_name}.pickle'), 'wb'))
 
     ax.bar(range(1, len(times) + 1), times, color='skyblue')
     ax.set_xlabel('Request')
     ax.set_ylabel('Time (s)')
     ax.set_title(f'{request_name} (Average: {avg_time:.3f} s)')
+    
     plt.savefig(os.path.join(images_path, f'{request_name}.png'))
     if show_figures:
         plt.show()
@@ -93,22 +95,28 @@ def delete_basket() -> list[float]:
     return [scenarios.delete_basket_by_id(basket_ids[i])[1] for i in range(num_requests)]
 
 
+methods = {
+    'create items': create_items,
+    'create baskets': create_basket,
+    'add item to basket': basket_add_item,
+    'get items': get_items,
+    'get item by id': get_item_by_id,
+    'get basket by id': get_basket_by_id,
+    'create order': create_order,
+    'get order by id': get_order_by_id,
+    'delete basket': delete_basket,
+    'delete item': delete_item
+}
+
 if __name__ == '__main__':
     num_requests = 100
     show_figures = eval(sys.argv[1])
     images_path = os.path.join(os.getcwd(), 'graphics', sys.argv[2])
+    data_path = os.path.join(os.getcwd(), 'graphics', sys.argv[2], 'data')
     os.makedirs(images_path, exist_ok=True)
+    os.makedirs(data_path, exist_ok=True)
     print(f'Saving graphics to {images_path}')
 
-    draw_graph('create items', create_items())
-    draw_graph('create baskets', create_basket())
-    draw_graph('add item to basket', basket_add_item())
-    draw_graph('get items', get_items())
-    draw_graph('get item by id', get_item_by_id())
-    draw_graph('get basket by id', get_basket_by_id())
-    draw_graph('create order', create_order())
-    draw_graph('get order by id', get_order_by_id())
-    draw_graph('remove item from basket', basket_remove_item())
-    draw_graph('delete basket', delete_basket())
-    draw_graph('delete item', delete_item())
+    for method in methods.items():
+        draw_graph(method[0], method[1]())
 

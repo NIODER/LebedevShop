@@ -8,8 +8,8 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ../../nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ../../nginx/logs/:/var/log/nginx/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs/:/var/log/nginx/
   nginx2:
     image: nginx
     links:
@@ -17,8 +17,8 @@ services:
     ports:
       - 8081:8080
     volumes:
-      - ../../nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ../../nginx/logs/:/var/log/nginx/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs/:/var/log/nginx/
   web1:
     build: ../../Shop.Web
     volumes:
