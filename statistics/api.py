@@ -3,48 +3,72 @@ import requests
 API_URL = 'http://localhost:8080'
 
 
-def get_items():
-    return requests.get(f'{API_URL}/items')
+def get_items() -> tuple[str, float]:
+    request = requests.get(f'{API_URL}/items')
+    return (request.json(), request.elapsed.total_seconds())
 
 
-def create_order(basket_id):
-    return requests.put(url=f'{API_URL}/order', json={
-        'address': 'some address',
+# creates order and returns order id and response time
+def create_order(basket_id: str, address: str) -> tuple[str, float]:
+    request = requests.put(url=f'{API_URL}/order', json={
+        'address': address,
         'basketId': basket_id
     })
+    return (request.json()['orderId'], request.elapsed.total_seconds())
 
 
-def create_item():
-    return requests.put(url=f'{API_URL}/items', json={
-        'itemName': 'item1',
-        'description': 'cool item!',
-        'cost': 123.123
+# creates item and returns item id and response time
+def create_item(item_name: str, description: str, cost: float) -> tuple[str, float]:
+    request = requests.put(url=f'{API_URL}/items', json={
+        'itemName': item_name,
+        'description': description,
+        'cost': cost
     })
+    return (request.json()['itemId'], request.elapsed.total_seconds())
 
 
-def delete_item(item_id):
-    return requests.delete(f'{API_URL}/items/{item_id}')
+# deletes item and returns deleted item and response time
+def delete_item(item_id: str) -> tuple[str, float]:
+    request = requests.delete(f'{API_URL}/items/{item_id}')
+    return (request.json(), request.elapsed.total_seconds())
 
 
-def get_item_by_id(item_id):
-    return requests.get(f'{API_URL}/items/{item_id}')
+# gets item and returns item json and response time
+def get_item_by_id(item_id: str) -> tuple[str, float]:
+    request = requests.get(f'{API_URL}/items/{item_id}')
+    return (request.json(), request.elapsed.total_seconds())
 
 
-def basket_add_item(basket_id, item_id):
-    return requests.post(f'{API_URL}/basket/{basket_id}/{item_id}')
+# adds item and returns basket json and response time
+def basket_add_item(basket_id: str, item_id: str) -> tuple[str, float]:
+    request = requests.post(f'{API_URL}/basket/{basket_id}/{item_id}')
+    return (request.json(), request.elapsed.total_seconds())
 
 
-def create_basket():
-    return requests.put(f'{API_URL}/basket')
+# creates basket and returns basket id and response time
+def create_basket() -> tuple[str, float]:
+    request = requests.put(f'{API_URL}/basket')
+    return (request.json()['basketId'], request.elapsed.total_seconds())
 
 
-def delete_basket_by_id(basket_id):
-    return requests.delete(f'{API_URL}/basket/{basket_id}')
+# deletes basket and return basket json and response time
+def delete_basket_by_id(basket_id: str) -> tuple[str, float]:
+    request = requests.delete(f'{API_URL}/basket/{basket_id}')
+    return (request.json(), request.elapsed.total_seconds())
 
 
-def delete_item_from_basket(basket_id, item_id):
-    return requests.delete(f'{API_URL}/basket/{basket_id}/{item_id}')
+# deletes item from basket and returns basket json and response time
+def delete_item_from_basket(basket_id: str, item_id: str) -> tuple[str, float]:
+    request = requests.delete(f'{API_URL}/basket/{basket_id}/{item_id}')
+    return (request.json(), request.elapsed.total_seconds())
 
 
-def get_basket_by_id(basket_id):
-    return requests.get(f'{API_URL}/basket/{basket_id}')
+# gets basket by id and returns basket json and response time
+def get_basket_by_id(basket_id: str) -> tuple[str, float]:
+    request = requests.get(f'{API_URL}/basket/{basket_id}')
+    return (request.json(), request.elapsed.total_seconds())
+
+
+def get_order_by_id(order_id: str) -> tuple[str, float]:
+    request = requests.get(f'{API_URL}/order/{order_id}')
+    return (request.json(), request.elapsed.total_seconds())

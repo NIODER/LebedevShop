@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Web.Contracts;
@@ -108,9 +109,8 @@ app.MapPut("/order", (ShopDbContext context, [FromBody]CreateOrderRequest reques
 
 app.MapGet("/order/{id}", (ShopDbContext context, Guid id) =>
 {
-    return context.Orders
-        .Include(o => o.OrderId)
-        .SingleOrDefault(o => o.OrderId == id) ?? throw new ArgumentException($"No order with id {id} was found.");
+    return context.Orders.SingleOrDefault(o => o.OrderId == id) 
+        ?? throw new ArgumentException($"No order with id {id} was found.");
 });
 
 await dbCreations;

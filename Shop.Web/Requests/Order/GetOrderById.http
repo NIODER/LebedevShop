@@ -1,0 +1,9 @@
+@Web_HostAddress = http://localhost:8080
+
+GET {{Web_HostAddress}}/order/77493c38-b92a-4690-bdc3-564a7e7df158 
+Accept: application/json
+Content-Type: application/json
+
+###
+
+

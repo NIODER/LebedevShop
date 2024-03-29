@@ -1,6 +1,6 @@
-@Web_HostAddress = http://localhost:5185
+@Web_HostAddress = http://localhost:8080
 
-POST {{Web_HostAddress}}/basket/be5cc537-ef9d-4e4e-ac58-b9747098ad24/98c6eb93-b963-4a43-9a46-48c8b86f96eb 
+POST {{Web_HostAddress}}/basket/edbe1e8b-d01e-4549-84e4-e18ff4ee7241/7cf010a5-4373-48d8-a7e6-f92ebba4b1bd
 Accept: application/json
 Content-Type: application/json
 
