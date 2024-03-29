@@ -3,8 +3,10 @@
 ## Запуск
 
 ```
-.\statistics\scripts\start_testing.bat
+.\statistics\scripts\start_testing.bat True
 ```
+
+True/False - показывать или не показывать графики в окнах. Они в любом случае сохранятся в graphics.
 
 Нужно будет нажать клавишу, когда композ поднимется, там должны быть надписи от pg_pool что healthcheck 1 succeed
 
